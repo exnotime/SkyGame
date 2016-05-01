@@ -1,10 +1,14 @@
 #pragma once
 #include "Graphics.h"
+#include "Timer.h"
 class Game {
 public:
 	Game();
 	~Game();
-	void Update(float deltaTime);
+	void Init();
+	void Update();
 	void Draw();
 private:
+	Timer m_GameTime;
+	GraphicsEngine m_Graphics;
 };

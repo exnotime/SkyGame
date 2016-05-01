@@ -45,6 +45,9 @@
     <ClCompile Include="Game\Graphics.cpp">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Camera.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="native_app_glue\android_native_app_glue.h">
@@ -60,6 +63,9 @@
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Timer.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Camera.h">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClInclude>
   </ItemGroup>

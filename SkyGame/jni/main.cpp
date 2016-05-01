@@ -27,6 +27,8 @@
 #include <android/log.h>
 #include "../native_app_glue/android_native_app_glue.h"
 
+#include "../Game/Game.h"
+
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
@@ -48,6 +50,7 @@ struct engine {
     EGLContext context;
     int32_t width;
     int32_t height;
+	Game m_Game;
 };
 
 /**
@@ -118,7 +121,7 @@ static void engine_draw_frame(struct engine* engine) {
     if (engine->display == NULL) {
         return;
     }
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
 	//put Graphics engine draw here
     eglSwapBuffers(engine->display, engine->surface);
 }
@@ -229,6 +232,9 @@ void android_main(struct android_app* state) {
     engine.sensorEventQueue = ASensorManager_createEventQueue(engine.sensorManager,
             state->looper, LOOPER_ID_USER, NULL, NULL);
 
+	//set up game and load all resources
+	engine.m_Game.Init();
+	engine.animating = 1;
     // loop waiting for stuff to do.
     while (true) {
         // Read all pending events.
@@ -268,6 +274,8 @@ void android_main(struct android_app* state) {
                 return;
             }
         }
+		engine.m_Game.Update();
+		engine.m_Game.Draw();
 		//always render
         engine_draw_frame(&engine);
     }
