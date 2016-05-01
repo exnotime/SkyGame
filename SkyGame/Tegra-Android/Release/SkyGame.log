@@ -1,0 +1,100 @@
+﻿  android_native_app_glue.c
+  main.cpp
+  SkyGame.vcxproj -> C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\Tegra-Android\Release\libSkyGame.so
+  Stripping C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\Tegra-Android\Release\libSkyGame.so to C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\Tegra-Android\Release\stripped_libSkyGame.so
+  Adding debuglink C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\Tegra-Android\Release\libSkyGame.so to C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\Tegra-Android\Release\stripped_libSkyGame.so
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Tegra-Android\Nvidia.AndroidBuild.targets(253,5): warning : Signing credentials were not specified, using debug signing.
+  Building using the JDK located here: 'C:\NVPACK\jdk1.7.0_71 (Native64Bit)'...
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Tegra-Android\Nvidia.AndroidBuild.targets(253,5): warning : When using a 64-bit Java runtime incremental builds may not function correctly.
+  Executing "C:\NVPACK\apache-ant-1.8.2\bin\ant.bat release -f C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\nsight_tegra_build.xml -listener org.apache.tools.ant.XmlLogger "
+  Buildfile: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\nsight_tegra_build.xml
+  
+  -set-mode-check:
+  
+  -set-release-mode:
+  
+  -release-obfuscation-check:
+       [echo] proguard.config is ${proguard.config}
+  
+  -pre-build:
+  
+  -check-env:
+   [checkenv] Android SDK Tools Revision 24.4.1
+   [checkenv] Installed at C:\NVPACK\android-sdk-windows
+  
+  -setup:
+       [echo] Project Name: SkyGame
+    [gettype] Project Type: Application
+  
+  -build-setup:
+  [getbuildtools] Using latest Build Tools: 23.0.2
+       [echo] Resolving Build Target for SkyGame...
+  [gettarget] Project Target:   Android 5.0.1
+  [gettarget] API level:        21
+       [echo] ----------
+       [echo] Creating output directories if needed...
+      [mkdir] Created dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin
+      [mkdir] Created dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\res
+      [mkdir] Created dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\rsObj
+      [mkdir] Created dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\rsLibs
+       [echo] ----------
+       [echo] Resolving Dependencies for SkyGame...
+  [dependency] Library dependencies:
+  [dependency] No Libraries
+  [dependency] 
+  [dependency] ------------------
+       [echo] ----------
+       [echo] Building Libraries with 'release'...
+     [subant] No sub-builds to iterate on
+  
+  -code-gen:
+  [mergemanifest] Merging AndroidManifest files into one.
+  [mergemanifest] Manifest merger disabled. Using project manifest only.
+       [echo] hasCode = false. Skipping aidl/renderscript/R.java
+  
+  -pre-compile:
+  
+  -compile:
+       [echo] hasCode = false. Skipping...
+  
+  -post-compile:
+  
+  -obfuscate:
+  
+  -dex:
+       [echo] hasCode = false. Skipping...
+  
+  -crunch:
+     [crunch] Crunching PNG Files in source dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\res
+     [crunch] To destination dir: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\res
+     [crunch] Crunched 0 PNG files to update cache
+  
+  -package-resources:
+       [aapt] Creating full resource package...
+  
+  -package:
+  [apkbuilder] Current build type is different than previous build: forced apkbuilder run.
+  [apkbuilder] Creating SkyGame-release-unsigned.apk for release...
+  
+  -post-package:
+  
+  -release-prompt-for-password:
+  
+  -release-nosign:
+  
+  -release-sign:
+       [echo] Signing final apk...
+   [zipalign] Running zip align on final apk...
+       [echo] Release Package: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\SkyGame-release.apk
+  [propertyfile] Creating new property file: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\build.prop
+  [propertyfile] Updating property file: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\build.prop
+  [propertyfile] Updating property file: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\build.prop
+  [propertyfile] Updating property file: C:\Users\krunk\Documents\AndroidNativeProjects\SkyGame\SkyGame\Tegra-Android\Release\bin\build.prop
+  
+  -post-build:
+  
+  release:
+  
+  BUILD SUCCESSFUL
+  Total time: 1 second
+  Picked up _JAVA_OPTIONS:  -Xms256m -Xmx1024m

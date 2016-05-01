@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="jni">
+      <UniqueIdentifier>4be7f99f-503f-4903-96a8-a2b87bb97fe6</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>2b4bbd0c-af99-40e4-b19b-cd97d04bfd6f</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\values">
+      <UniqueIdentifier>e4a14ed8-7ce8-41d1-b1c1-cc0390ba416e</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyGame">
+      <UniqueIdentifier>{ed64ae23-a56f-4383-8019-405864405488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyGame\SkyGame">
+      <UniqueIdentifier>{8bb188f8-7d71-4ad9-943b-83be0a3f53cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyGame\SkyGame\native_app_glue">
+      <UniqueIdentifier>{0641997a-c110-4b2f-be2c-4104be05260c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyGame\SkyGame\Game">
+      <UniqueIdentifier>{ca6a4d62-7b6c-40db-badd-6252481f2537}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidBuild Include="AndroidManifest.xml" />
+    <AndroidBuild Include="res\values\strings.xml">
+      <Filter>res\values</Filter>
+    </AndroidBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="jni\main.cpp">
+      <Filter>jni</Filter>
+    </ClCompile>
+    <ClCompile Include="native_app_glue\android_native_app_glue.c">
+      <Filter>SkyGame\SkyGame\native_app_glue</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Graphics.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="native_app_glue\android_native_app_glue.h">
+      <Filter>SkyGame\SkyGame\native_app_glue</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Graphics.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Input.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Timer.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

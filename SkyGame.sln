@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkyGame", "SkyGame\SkyGame.vcxproj", "{2994094E-6645-4A9B-A463-C907D757AB6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|Tegra-Android = Debug|Tegra-Android
+		Release|ARM = Release|ARM
+		Release|Tegra-Android = Release|Tegra-Android
+		Shipping|ARM = Shipping|ARM
+		Shipping|Tegra-Android = Shipping|Tegra-Android
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Debug|ARM.Build.0 = Debug|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Debug|Tegra-Android.ActiveCfg = Debug|Tegra-Android
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Debug|Tegra-Android.Build.0 = Debug|Tegra-Android
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Release|ARM.ActiveCfg = Release|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Release|ARM.Build.0 = Release|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Release|Tegra-Android.ActiveCfg = Debug|Tegra-Android
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Release|Tegra-Android.Build.0 = Debug|Tegra-Android
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Shipping|ARM.ActiveCfg = Shipping|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Shipping|ARM.Build.0 = Shipping|ARM
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Shipping|Tegra-Android.ActiveCfg = Shipping|Tegra-Android
+		{2994094E-6645-4A9B-A463-C907D757AB6F}.Shipping|Tegra-Android.Build.0 = Shipping|Tegra-Android
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
