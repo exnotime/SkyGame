@@ -48,6 +48,21 @@
     <ClCompile Include="Game\Camera.cpp">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\AssetManager.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Shader.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ShaderProgram.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\VertexBuffer.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\CollisionHandler.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="native_app_glue\android_native_app_glue.h">
@@ -66,6 +81,24 @@
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Camera.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\AssetManager.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\VertexBuffer.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Shader.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ShaderProgram.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Vertex.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\CollisionHandler.h">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClInclude>
   </ItemGroup>

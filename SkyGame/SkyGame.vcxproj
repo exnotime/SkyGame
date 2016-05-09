@@ -37,6 +37,7 @@
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
     <AndroidMinAPI>android-18</AndroidMinAPI>
+    <NdkToolchainVersion>Default</NdkToolchainVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
@@ -44,12 +45,15 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
+    <ConfigurationType>Application</ConfigurationType>
+    <AndroidMinAPI>android-18</AndroidMinAPI>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Shipping|Tegra-Android'">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
+    <AndroidMinAPI>android-18</AndroidMinAPI>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|ARM'" Label="Configuration">
     <AndroidTargetAPI>android-21</AndroidTargetAPI>
@@ -59,7 +63,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
+    <DeployAfterBuild>DeployAndRun</DeployAfterBuild>
+    <FastDeploy>true</FastDeploy>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -67,7 +74,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/Include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv1_CM</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv3</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -102,9 +109,10 @@
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\krunk\Desktop\SkyGame\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv1_CM</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv3</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|ARM'">
@@ -121,19 +129,30 @@
     <AndroidBuild Include="res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\AssetManager.cpp" />
     <ClCompile Include="Game\Camera.cpp" />
+    <ClCompile Include="Game\CollisionHandler.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\Graphics.cpp" />
     <ClCompile Include="Game\Input.cpp" />
+    <ClCompile Include="Game\Shader.cpp" />
+    <ClCompile Include="Game\ShaderProgram.cpp" />
+    <ClCompile Include="Game\VertexBuffer.cpp" />
     <ClCompile Include="jni\main.cpp" />
     <ClCompile Include="native_app_glue\android_native_app_glue.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\AssetManager.h" />
     <ClInclude Include="Game\Camera.h" />
+    <ClInclude Include="Game\CollisionHandler.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Graphics.h" />
     <ClInclude Include="Game\Input.h" />
+    <ClInclude Include="Game\Shader.h" />
+    <ClInclude Include="Game\ShaderProgram.h" />
     <ClInclude Include="Game\Timer.h" />
+    <ClInclude Include="Game\Vertex.h" />
+    <ClInclude Include="Game\VertexBuffer.h" />
     <ClInclude Include="native_app_glue\android_native_app_glue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

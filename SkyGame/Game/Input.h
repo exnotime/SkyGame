@@ -1,18 +1,23 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
+
+#define g_Input InputManager::GetInstance()
 class InputManager{
 public:
 	~InputManager();
 	static InputManager& GetInstance();
-	void AddTouch(glm::vec2 touch);
-	int GetTouchCount();
+	
+	void UpdateTouch(glm::vec2 pos, int index);
+	void Update();
 	glm::vec2 GetTouch(int index);
 	glm::vec2 GetTouchDelta(int index);
-	void Update();
+	void SetTouchCount(int count) { m_TouchCount = count; }
+	int GetTouchCount() { return m_TouchCount; }
 private:
 	InputManager();
-	std::vector<glm::vec2>* m_CurrentTouches;
-	std::vector<glm::vec2>* m_LastFrameTouches;
+	int m_TouchCount = 0;
+	std::vector<glm::vec2> m_CurrentTouches;
+	std::vector<glm::vec2> m_TouchDeltas;
 
 };

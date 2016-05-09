@@ -1,4 +1,8 @@
-﻿  Stripping C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\libSkyGame.so to C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\stripped_libSkyGame.so
+﻿  CollisionHandler.cpp
+  main.cpp
+  Game.cpp
+  SkyGame.vcxproj -> C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\libSkyGame.so
+  Stripping C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\libSkyGame.so to C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\stripped_libSkyGame.so
   Adding debuglink C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\libSkyGame.so to C:\Users\krunk\Desktop\SkyGame\Tegra-Android\Debug\stripped_libSkyGame.so
 C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Tegra-Android\Nvidia.AndroidBuild.targets(253,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\krunk\Desktop\SkyGame\SkyGame\Tegra-Android\Debug\ant.command.1.tlog" being invalid.
   Building using the JDK located here: 'C:\NVPACK\jdk1.7.0_71 (Native64Bit)'...
@@ -88,6 +92,6 @@ C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Tegra-Android\N
   debug:
   
   BUILD SUCCESSFUL
-  Total time: 2 seconds
+  Total time: 6 seconds
   Picked up _JAVA_OPTIONS:  -Xms256m -Xmx1024m
 C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Tegra-Android\Nvidia.AndroidBuild.targets(253,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\krunk\Desktop\SkyGame\SkyGame\Tegra-Android\Debug\ant.command.1.tlog" being invalid.

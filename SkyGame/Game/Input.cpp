@@ -1,13 +1,11 @@
 #include "Input.h"
 
 InputManager::InputManager() {
-	m_CurrentTouches = new std::vector<glm::vec2>();
-	m_LastFrameTouches = new std::vector<glm::vec2>();
+	m_CurrentTouches.resize(3);
+	m_TouchDeltas.resize(3);
 }
 
 InputManager::~InputManager() {
-	if (m_CurrentTouches) delete m_CurrentTouches;
-	if (m_LastFrameTouches) delete m_LastFrameTouches;
 }
 
 InputManager& InputManager::GetInstance() {
@@ -15,26 +13,27 @@ InputManager& InputManager::GetInstance() {
 	return m_Instance;
 }
 
-void InputManager::AddTouch(glm::vec2 touch) {
-	m_CurrentTouches->push_back(touch);
-}
-
-int InputManager::GetTouchCount() {
-	return m_CurrentTouches->size();
-}
-
-glm::vec2 InputManager::GetTouch(int index) {
-	return m_CurrentTouches->at(index);
-}
-
-glm::vec2 InputManager::GetTouchDelta(int index) {
-	return m_LastFrameTouches->at(index) - m_CurrentTouches->at(index);
+void InputManager::UpdateTouch(glm::vec2 pos, int index) {
+	m_TouchDeltas[index] = pos - m_CurrentTouches[index];
+	m_TouchDeltas[index] = glm::clamp(m_TouchDeltas[index], glm::vec2(-5), glm::vec2(5)); //clamp 
+	m_CurrentTouches[index] = pos;
 }
 
 void InputManager::Update() {
-	//swap and clear
-	m_LastFrameTouches->clear();
-	std::vector<glm::vec2>* temp = m_CurrentTouches;
-	m_CurrentTouches = m_LastFrameTouches;
-	m_LastFrameTouches = temp;
+	//clear deltas so we dont have sticky fingers
+	for (auto& delta : m_TouchDeltas) {
+		delta = glm::vec2(0);
+	}
+}
+
+glm::vec2 InputManager::GetTouch(int index) {
+	if (index < 0 || index >= m_CurrentTouches.size())
+		return glm::vec2(0, 0);
+	return m_CurrentTouches.at(index);
+}
+
+glm::vec2 InputManager::GetTouchDelta(int index) {
+	if(index < 0 || index >= m_TouchDeltas.size())
+		return glm::vec2(0, 0);
+	return m_TouchDeltas.at(index);
 }
