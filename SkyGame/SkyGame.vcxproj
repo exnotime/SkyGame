@@ -74,8 +74,18 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/Include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv3</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv3;OpenSLES;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
+    <AntBuild>
+      <NativeLibDirectories>
+      </NativeLibDirectories>
+    </AntBuild>
+    <AntBuild>
+      <NativeLibDependencies>
+      </NativeLibDependencies>
+    </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -93,8 +103,18 @@
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv1_CM</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv3;OpenSLES;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
+    <AntBuild>
+      <NativeLibDirectories>
+      </NativeLibDirectories>
+    </AntBuild>
+    <AntBuild>
+      <NativeLibDependencies>
+      </NativeLibDependencies>
+    </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
@@ -112,8 +132,18 @@
       <AdditionalIncludeDirectories>C:\Users\krunk\Desktop\SkyGame\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv3</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv3;OpenSLES;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
+    <AntBuild>
+      <NativeLibDirectories>
+      </NativeLibDirectories>
+    </AntBuild>
+    <AntBuild>
+      <NativeLibDependencies>
+      </NativeLibDependencies>
+    </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|ARM'">
     <ClCompile>
@@ -135,8 +165,13 @@
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\Graphics.cpp" />
     <ClCompile Include="Game\Input.cpp" />
+    <ClCompile Include="Game\Level.cpp" />
+    <ClCompile Include="Game\NextLevelMenu.cpp" />
     <ClCompile Include="Game\Shader.cpp" />
     <ClCompile Include="Game\ShaderProgram.cpp" />
+    <ClCompile Include="Game\SoundManager.cpp" />
+    <ClCompile Include="Game\SpriteEngine.cpp" />
+    <ClCompile Include="Game\Texture.cpp" />
     <ClCompile Include="Game\VertexBuffer.cpp" />
     <ClCompile Include="jni\main.cpp" />
     <ClCompile Include="native_app_glue\android_native_app_glue.c" />
@@ -148,12 +183,20 @@
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Graphics.h" />
     <ClInclude Include="Game\Input.h" />
+    <ClInclude Include="Game\Level.h" />
+    <ClInclude Include="Game\NextLevelMenu.h" />
     <ClInclude Include="Game\Shader.h" />
     <ClInclude Include="Game\ShaderProgram.h" />
+    <ClInclude Include="Game\SoundManager.h" />
+    <ClInclude Include="Game\SpriteEngine.h" />
+    <ClInclude Include="Game\Texture.h" />
     <ClInclude Include="Game\Timer.h" />
     <ClInclude Include="Game\Vertex.h" />
     <ClInclude Include="Game\VertexBuffer.h" />
     <ClInclude Include="native_app_glue\android_native_app_glue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\drawable\icon.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

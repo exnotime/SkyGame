@@ -22,6 +22,9 @@
     <Filter Include="SkyGame\SkyGame\Game">
       <UniqueIdentifier>{ca6a4d62-7b6c-40db-badd-6252481f2537}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res\drawable">
+      <UniqueIdentifier>{1830da69-1816-4d9e-8339-4c7392c08294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <AndroidBuild Include="AndroidManifest.xml" />
@@ -63,6 +66,21 @@
     <ClCompile Include="Game\CollisionHandler.cpp">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Level.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Texture.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SpriteEngine.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\NextLevelMenu.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SoundManager.cpp">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="native_app_glue\android_native_app_glue.h">
@@ -101,5 +119,25 @@
     <ClInclude Include="Game\CollisionHandler.h">
       <Filter>SkyGame\SkyGame\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Level.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Texture.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SpriteEngine.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\NextLevelMenu.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SoundManager.h">
+      <Filter>SkyGame\SkyGame\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\drawable\icon.png">
+      <Filter>res\drawable</Filter>
+    </None>
   </ItemGroup>
 </Project>

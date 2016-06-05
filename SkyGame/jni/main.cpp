@@ -121,14 +121,13 @@ static int engine_init_display(struct engine* engine) {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glDisable(GL_BLEND);
-	glDisable(GL_CULL_FACE);
 	glEnable(GL_STENCIL_TEST);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glClearColor(0.4f, 0.58f, 0.92f, 1.0f); // cornflower blue
 	glViewport(0, 0, engine->width, engine->height);
-	engine->m_Game.Init(glm::vec2(engine->width, engine->height));
+	engine->m_Game.Init(glm::vec2(engine->width, engine->height), (GameState*)engine->app->savedState);
 	engine->animating = 1;
     return 0;
 }
@@ -210,9 +209,10 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
     switch (cmd) {
         case APP_CMD_SAVE_STATE:
             // The system has asked us to save our current state.  Do so.
-            //engine->app->savedState = malloc(sizeof(struct saved_state));
-            //*((struct saved_state*)engine->app->savedState) = engine->state;
-            //engine->app->savedStateSize = sizeof(struct saved_state);
+            app->savedState = malloc(sizeof(GameState));
+            *((GameState*)app->savedState) = engine->m_Game.GetGameState();
+			app->savedStateSize = sizeof(GameState);
+			app->stateSaved = 1;
             break;
         case APP_CMD_INIT_WINDOW:
             // The window is being shown, get it ready.
@@ -274,8 +274,8 @@ void android_main(struct android_app* state) {
             state->looper, LOOPER_ID_USER, NULL, NULL);
 	g_AssetManager.SetAssetManager(engine.app->activity->assetManager);
 	AInputQueue* inputQueue = engine.app->inputQueue;
-	
     // loop waiting for stuff to do.
+
     while (true) {
         // Read all pending events.
         int ident;

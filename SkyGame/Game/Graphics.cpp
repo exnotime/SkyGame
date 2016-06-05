@@ -17,38 +17,59 @@ void GraphicsEngine::Init(const glm::vec2& screenSize) {
 	m_ScreenSize = screenSize;
 	GenerateCube();
 	//create Shaders
-	glCreateProgram();
-	Shader geometryVertShader;
-	Shader geometryFragShader;
+	Shader vertShader;
+	Shader fragShader;
+	Shader skyVertShader;
+	Shader skyFragShader;
 	std::vector<Shader*> shaders;
 	AssetFile* file;
 	if (g_AssetManager.LoadAssetFile("shaders/geometry.vert", &file)) {
-		geometryVertShader.CreateFromString(std::string(file->Data, file->Size), GL_VERTEX_SHADER, "shader/geometry.vert", true);
+		vertShader.CreateFromString(std::string(file->Data, file->Size), GL_VERTEX_SHADER, "shaders/geometry.vert", true);
 		g_AssetManager.FreeAssetFile(file);
-		shaders.push_back(&geometryVertShader);
+		shaders.push_back(&vertShader);
 	}
 	if (g_AssetManager.LoadAssetFile("shaders/geometry.frag", &file)) {
-		geometryFragShader.CreateFromString(std::string(file->Data, file->Size), GL_FRAGMENT_SHADER, "shader/geometry.frag", true);
+		fragShader.CreateFromString(std::string(file->Data, file->Size), GL_FRAGMENT_SHADER, "shaders/geometry.frag", true);
 		g_AssetManager.FreeAssetFile(file);
-		shaders.push_back(&geometryFragShader);
+		shaders.push_back(&fragShader);
 	}
 	m_GeometryProgram.Init(shaders, true);
-	//once program is linked there is no need for the shader code to reside in memory anymore
-	geometryVertShader.Clear();
-	geometryFragShader.Clear();
-	int i = 0;
+	vertShader.Clear();
+	fragShader.Clear();
+	shaders.clear();
+	//sky shader
+	if (g_AssetManager.LoadAssetFile("shaders/sky.vert", &file)) {
+		skyVertShader.CreateFromString(std::string(file->Data, file->Size), GL_VERTEX_SHADER, "shaders/sky.vert", true);
+		g_AssetManager.FreeAssetFile(file);
+		shaders.push_back(&skyVertShader);
+	}
+	if (g_AssetManager.LoadAssetFile("shaders/sky.frag", &file)) {
+		skyFragShader.CreateFromString(std::string(file->Data, file->Size), GL_FRAGMENT_SHADER, "shaders/sky.frag", true);
+		g_AssetManager.FreeAssetFile(file);
+		shaders.push_back(&skyFragShader);
+	}
+	m_SkyProgram.Init(shaders, true);
+	skyVertShader.Clear();
+	skyFragShader.Clear();
+
+	m_Texture.Load("textures/box_texture.png");
+	m_NormalTexture.Load("textures/bump.png");
 	m_Initialized = true;
 }
 
 void GraphicsEngine::Render(const Camera& cam, const std::vector<CubeModel>& cubeList) {
 	if (!m_Initialized)
 		return;
-	//clear screen
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, m_ScreenSize.x, m_ScreenSize.y);
 	//set up buffers
 	m_VertexBuffer.Apply();
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
+	//render sky
+	glCullFace(GL_FRONT);
+	glDepthFunc(GL_LEQUAL);
+	m_SkyProgram.Apply();
+	m_SkyProgram.SetUniformMat4("g_ProjView", cam.GetViewProjection());
+	m_SkyProgram.SetUniformMat4("g_World", glm::translate(cam.GetPosition()));
+	glDrawArrays(GL_TRIANGLES, 0, m_CubeVerticeCount);
+	glCullFace(GL_BACK);
 	//apply shaders
 	m_GeometryProgram.Apply();
 	m_GeometryProgram.SetUniformMat4("g_ViewProj", cam.GetViewProjection());
@@ -58,14 +79,12 @@ void GraphicsEngine::Render(const Camera& cam, const std::vector<CubeModel>& cub
 		m_GeometryProgram.SetUniformMat4("g_World", world);
 		m_GeometryProgram.SetUniformVec3("g_Color", cube.Color);
 		m_GeometryProgram.SetUniformVec3("g_CamPos", cam.GetPosition());
-		glDrawElements(GL_TRIANGLES, m_CubeIndiceCount, GL_UNSIGNED_SHORT, nullptr);
+		m_GeometryProgram.SetUniformTextureHandle("g_Texture", m_Texture.GetHandle(), 0);
+		m_GeometryProgram.SetUniformTextureHandle("g_NormalMap", m_NormalTexture.GetHandle(), 1);
+		glDrawArrays(GL_TRIANGLES, 0, m_CubeVerticeCount);
 	}
-
-	GLenum error = glGetError();
-	while (error != GL_NO_ERROR) {
-		LOGI("openGL error %i\n", error);
-		error = glGetError();
-	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glUseProgram(0);
 }
 
 void GraphicsEngine::GenerateCube() {
@@ -86,39 +105,23 @@ void GraphicsEngine::GenerateCube() {
 	for (int i = 0; i < mesh->npoints * 3; i += 3) {
 		vertex.Position = glm::vec3(mesh->points[i], mesh->points[i + 1], mesh->points[i + 2]);
 		glm::vec3 normal = glm::vec3(mesh->normals[i], mesh->normals[i + 1], mesh->normals[i + 2]);
-		glm::vec3 c1 = glm::cross(normal, glm::vec3(0.0, 0.0, 1.0));
-		glm::vec3 c2 = glm::cross(normal, glm::vec3(0.0, 1.0, 0.0));
-		glm::vec3 tangent;
-		if (glm::length(c1) > glm::length(c2)) {
-			tangent = c1;
-		}
-		else {
-			tangent = c2;
-		}
 		vertex.Normal = glm::normalize(normal);
-		//most shapes dont have texture coordinates so just create tex coords as if it was a sphere and hope for the best :)
-		if (!mesh->tcoords) {
-			glm::vec2 uv;
-			uv.x = glm::dot(glm::vec3(vertex.Normal), glm::vec3(1, 0, 0)) * 0.5 + 0.5;
-			uv.y = glm::dot(glm::vec3(vertex.Normal), glm::vec3(0, 1, 0)) * 0.5 + 0.5;
-			vertex.TexCoord = glm::vec2(uv);
+		if (vertex.Normal == glm::vec3(0, 0, -1) || vertex.Normal == glm::vec3(0,0,1)) {
+			vertex.TexCoord.x = vertex.Position.x * 0.5f + 0.5f;
+			vertex.TexCoord.y = vertex.Position.y * 0.5f + 0.5f;
 		}
-		else {
-			vertex.TexCoord = glm::vec2(mesh->tcoords[texIndex], mesh->tcoords[texIndex + 1]);
-			texIndex += 2;
+		else if (vertex.Normal == glm::vec3(0, -1, 0) || vertex.Normal == glm::vec3(0, 1, 0)) {
+			vertex.TexCoord.x = vertex.Position.x * 0.5f + 0.5f;
+			vertex.TexCoord.y = vertex.Position.z * 0.5f + 0.5f;
 		}
+		else if (vertex.Normal == glm::vec3(-1, 0, 0) || vertex.Normal == glm::vec3(1, 0, 0)) {
+			vertex.TexCoord.x = vertex.Position.z * 0.5f + 0.5f;
+			vertex.TexCoord.y = vertex.Position.y * 0.5f + 0.5f;
+		}
+
 		vertices.push_back(vertex);
 	}
-
-	std::vector<unsigned short> indices;
-	for (int i = 0; i < mesh->ntriangles * 3; i += 3) {
-		indices.push_back(mesh->triangles[i]);
-		indices.push_back(mesh->triangles[i + 1]);
-		indices.push_back(mesh->triangles[i + 2]);
-	}
-	m_VertexBuffer.Init(VertexType::POS_NORMAL_TEX, vertices.data(), vertices.size() * sizeof(VertexPosNormalTex));
-	glGenBuffers(1, &m_IndexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
-	m_CubeIndiceCount = indices.size();
+	//HACK: this vertexbuffer is reused for sprites thats why we add 40 extra vertices
+	m_VertexBuffer.Init(VertexType::POS_NORMAL_TEX, vertices.data(), (vertices.size() + 40) * sizeof(VertexPosNormalTex) );
+	m_CubeVerticeCount = vertices.size();
 }

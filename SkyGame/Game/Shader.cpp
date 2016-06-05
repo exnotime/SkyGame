@@ -13,7 +13,6 @@ bool Shader::CreateFromString(const std::string& ShaderCode, GLenum ShaderType, 
 	m_Handle = glCreateShader ( ShaderType );
 	if ( m_Handle == 0 ) {
 		if ( print ) {
-			//Logger::Log( "Error creating shader", "Shader", LogSeverity::ERROR_MSG );
 		}
 	}
 	const char* text = ShaderCode.c_str();

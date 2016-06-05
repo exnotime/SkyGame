@@ -37,3 +37,18 @@ glm::vec2 InputManager::GetTouchDelta(int index) {
 		return glm::vec2(0, 0);
 	return m_TouchDeltas.at(index);
 }
+
+bool InputManager::GetTap(glm::vec2& tap) {
+	if (m_TouchCount > 0) {
+		if (m_TouchDeltas.at(0).x > 0 || m_TouchDeltas.at(0).y > 0) {
+			return false;
+		}
+		else {
+			tap = m_CurrentTouches.at(0);
+			return true;
+		}
+	}
+	else {
+		return false;
+	}
+}

@@ -12,6 +12,7 @@ public:
 	void Update();
 	glm::vec2 GetTouch(int index);
 	glm::vec2 GetTouchDelta(int index);
+	bool GetTap(glm::vec2& tap);
 	void SetTouchCount(int count) { m_TouchCount = count; }
 	int GetTouchCount() { return m_TouchCount; }
 private:

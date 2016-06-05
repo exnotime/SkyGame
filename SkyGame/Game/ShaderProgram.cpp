@@ -128,25 +128,7 @@ void ShaderProgram::SetUniformMat4 ( const std::string& name, const glm::mat4x4&
 }
 
 void ShaderProgram::SetUniformTextureHandle(const std::string& name, GLuint tex, int index) {
-	glUniform1i(FetchUniform(name), index);
+	glUniform1i(GetUniformLocationByName(name), index);
 	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, tex);
-}
-
-GLint ShaderProgram::FetchUniform ( const std::string& name ) {
-	auto it = m_UniformMap.find ( name );
-	// Uniform wasn't found in cache
-	if ( it == m_UniformMap.end() ) {
-		GLint loc = GetUniformLocationByName ( name );
-		// Don't emplace in cache if uniform was invalid
-		if ( loc != -1 ) {
-			m_UniformMap[name] = loc;
-		} else {
-			//printf("Failed to fetch unifrom : %s\n",name.c_str());
-			//assert(false); //makes it annoying to debug shaders
-		}
-		return loc;// Uniform was found in cache
-	} else {
-		return it->second;
-	}
 }

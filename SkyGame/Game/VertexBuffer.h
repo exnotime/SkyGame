@@ -16,4 +16,5 @@ class VertexBuffer {
 	bool Init ( VertexType VertexType, void* Data, unsigned int Size);
 	void Apply();
 	void Release();
+	void Update(void* data, unsigned int size, unsigned int offset);
 };

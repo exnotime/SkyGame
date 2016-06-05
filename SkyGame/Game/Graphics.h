@@ -4,6 +4,7 @@
 #include "ShaderProgram.h"
 #include "VertexBuffer.h"
 #include "Camera.h"
+#include "Texture.h"
 struct CubeModel {
 	glm::vec3 Color;
 	glm::vec3 Position;
@@ -19,9 +20,11 @@ public:
 	glm::vec2 GetScreenSize() { return m_ScreenSize; }
 private:
 	ShaderProgram	m_GeometryProgram;
+	ShaderProgram	m_SkyProgram;
 	VertexBuffer	m_VertexBuffer;
-	GLuint			m_IndexBuffer;
 	glm::vec2		m_ScreenSize;
+	Texture			m_Texture;
+	Texture			m_NormalTexture;
 	bool m_Initialized = false;
-	int m_CubeIndiceCount = 0;
+	int m_CubeVerticeCount = 0;
 };

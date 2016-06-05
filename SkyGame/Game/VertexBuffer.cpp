@@ -20,7 +20,7 @@ bool VertexBuffer::Init( VertexType VertexType, void* Data, unsigned int Size ) 
 
 	glBindVertexArray(m_VertexArrayId);
 	glBindBuffer ( GL_ARRAY_BUFFER, m_Handle );
-	glBufferData ( GL_ARRAY_BUFFER, Size, Data, GL_STATIC_DRAW );
+	glBufferData ( GL_ARRAY_BUFFER, Size, Data, GL_DYNAMIC_DRAW );
 	if ( VertexType == POS_NORMAL_TEX ) {
 		glEnableVertexAttribArray ( 0 );
 		glEnableVertexAttribArray ( 1 );
@@ -34,6 +34,8 @@ bool VertexBuffer::Init( VertexType VertexType, void* Data, unsigned int Size ) 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	return glIsBuffer ( m_Handle ) == GL_TRUE;
 }
+
+
 void VertexBuffer::Apply() {
 	glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPosNormalTex), 0);
@@ -47,4 +49,10 @@ void VertexBuffer::Apply() {
 
 void VertexBuffer::Release() {
 	glDeleteBuffers ( 1, &m_Handle );
+}
+
+void VertexBuffer::Update(void* data, unsigned int size, unsigned int offset) {
+	glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
+	glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

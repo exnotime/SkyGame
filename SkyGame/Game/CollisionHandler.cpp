@@ -14,7 +14,16 @@ bool CollisionHandler::AABBvsAABB(const AABB& a, const AABB& b) {
 		a.Max.z > b.Min.z && a.Min.z < b.Max.z);
 }
 
-glm::vec3 CollisionHandler::HandleCollisions(const AABB& player, glm::vec3 velocity, const std::vector<AABB>& boxes) {
+bool CollisionHandler::RectvsPoint(const glm::vec4& rect, const glm::vec2& point) {
+	return	point.x > rect.x && point.x < rect.x + rect.z &&
+			point.y > rect.y && point.y < rect.y + rect.w;
+}
+
+glm::vec3 CollisionHandler::HandleCollisions(const AABB& player, glm::vec3 velocity, const std::vector<AABB>& boxes, bool& outInAir) {
+	//if we are resting dont really need collisions
+	if (!outInAir) {
+		return glm::vec3(0);
+	}
 	//construct broadphase AABB
 	AABB broadphase;
 	broadphase.Min = glm::min(player.Min, player.Min + velocity);
@@ -33,6 +42,11 @@ glm::vec3 CollisionHandler::HandleCollisions(const AABB& player, glm::vec3 veloc
 		}
 	}
 	glm::vec3 playerMovement = velocity * minTime;
+	//if minTime = 0 the collision normal may be flipped 
+	if (finalNormal == glm::vec3(0, 1, 0) || finalNormal == glm::vec3(0, -1, 0)) {
+		outInAir = false;
+		return playerMovement;
+	}
 	if (minTime < 1.0f) {
 		if (finalNormal.x != 0) {
 			velocity.x = 0;
@@ -43,8 +57,10 @@ glm::vec3 CollisionHandler::HandleCollisions(const AABB& player, glm::vec3 veloc
 		else {
 			velocity.z = 0;
 		}
+		playerMovement += finalNormal * 0.1f; //move out of near plane
 		playerMovement += velocity * (1.0f - minTime);
 	}
+	outInAir = true;
 	return playerMovement;
 }
 
